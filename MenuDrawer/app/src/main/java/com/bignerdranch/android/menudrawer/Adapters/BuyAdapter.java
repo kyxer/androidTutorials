@@ -58,11 +58,6 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
         detailTextView.setText(car.getCarYear()+" | "+ Formats.toKm(car.getKm()) + " | " + car.getTransmission() + " | " + car.getAvgFuelConsumption());
         priceTextView.setText(Formats.toMXDCurrency(car.getPrice()));
 
-
-        if (car.getStatus().equals(StatusCar.BOOKED)){
-
-        }
-
         //TextView yearProductionTextView = holder.productionYear;
         //yearProductionTextView.setText(car.getBodyType());
         Picasso.with(getContext()).load(car.getImageUrl()).error(android.R.drawable.stat_notify_error).fit().into(holder.carImageView);
