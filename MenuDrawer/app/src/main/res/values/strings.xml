@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MenuDrawer</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>COMPRAR</item>
+        <item>VENDER</item>
+        <item>CUENTA</item>
+    </string-array>
+</resources>
