@@ -1,5 +1,6 @@
 package com.bignerdranch.android.menudrawer;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -7,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bignerdranch.android.menudrawer.Adapters.DrawerItemCustomAdapter;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-        setupToolbar();
+        setupToolbar(0);
 
         mDrawerItems = new DataModel[3];
         mDrawerItems[0] = new DataModel(R.drawable.ic_buy, "COMPRAR");
@@ -101,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
             mDrawerList.setSelection(position);
             setTitle(mNavigationDrawerItemTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
-
         } else {
             Log.e("MainActivity", "Error in creating fragment");
         }
+        setupToolbar(position);
     }
 
     @Override
@@ -129,10 +132,20 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
     }
 
-    void setupToolbar(){
+    void setupToolbar(int position){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        LinearLayout container = toolbar.findViewById(R.id.toolbar_container);
+        container.removeAllViewsInLayout();
+        if (position == 0){
+            View aux = LayoutInflater.from(this).inflate(R.layout.toolbar_sell,null);
+            container.addView(aux);
+        } else if (position == 1) {
+
+        } else if (position == 2) {
+
+        }
     }
 
     void setupDrawerToggle(){

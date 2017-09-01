@@ -1,7 +1,9 @@
 package com.bignerdranch.android.menudrawer.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +55,44 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
         TextView nameTextView = holder.nameTextView;
         TextView detailTextView = holder.detailTextView;
         TextView priceTextView = holder.priceTextView;
+        TextView statusTextView = holder.statusTextView;
+        ImageView newArrivalImageView = holder.newArrivalImageView;
+        TextView marketPriceTextView = holder.marketPriceTextView;
+        TextView savingPriceTextView = holder.savingPriceTextView;
 
         nameTextView.setText(car.getCarName());
+        marketPriceTextView.setText(Formats.toMXDCurrency(car.getMarketPrice()));
+        savingPriceTextView.setText(Formats.toMXDCurrency(car.getSavings()));
         detailTextView.setText(car.getCarYear()+" | "+ Formats.toKm(car.getKm()) + " | " + car.getTransmission() + " | " + car.getAvgFuelConsumption());
         priceTextView.setText(Formats.toMXDCurrency(car.getPrice()));
+
+
+        switch (car.getStatus()){
+            case AVAILABLE:
+                statusTextView.setVisibility(View.GONE);
+                newArrivalImageView.setVisibility(View.GONE);
+                break;
+            case BOOKED:
+                statusTextView.setVisibility(View.VISIBLE);
+                newArrivalImageView.setVisibility(View.GONE);
+                statusTextView.setBackgroundColor(getContext().getResources().getColor(R.color.blueR154G220B222));
+                statusTextView.setText(R.string.status_car_booked);
+                break;
+            case NEW_ARRIVAL:
+                statusTextView.setVisibility(View.GONE);
+                newArrivalImageView.setVisibility(View.VISIBLE);
+                break;
+            default:
+                statusTextView.setVisibility(View.GONE);
+                newArrivalImageView.setVisibility(View.GONE);
+                break;
+        }
+
+        if (car.getPromotionPrice() != null && car.getStatus().equals(StatusCar.AVAILABLE)){
+            statusTextView.setVisibility(View.VISIBLE);
+            statusTextView.setText(car.getPromotionName());
+            statusTextView.setBackgroundColor(Color.parseColor(car.getPromotionColor()));
+        }
 
         //TextView yearProductionTextView = holder.productionYear;
         //yearProductionTextView.setText(car.getBodyType());
@@ -105,6 +141,10 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
         private TextView detailTextView;
         private TextView priceTextView;
         private ImageView carImageView;
+        private TextView statusTextView;
+        private ImageView newArrivalImageView;
+        private TextView savingPriceTextView;
+        private TextView marketPriceTextView;
 
         //Used to clear animation.
         private View mRootView;
@@ -120,8 +160,12 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
             carImageView = (ImageView) itemView.findViewById(R.id.carImageView);
             detailTextView = (TextView) itemView.findViewById(R.id.detailTextView);
             priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
+            statusTextView = (TextView) itemView.findViewById(R.id.statusTextView);
+            newArrivalImageView = (ImageView) itemView.findViewById(R.id.newArrivalImageView);
+            savingPriceTextView = (TextView) itemView.findViewById(R.id.savingPriceTextView);
+            marketPriceTextView = (TextView) itemView.findViewById(R.id.marketPriceTextView);
 
-            // Make sure you are applying getRootView() method on a first level child in view hierarchy.
+                    // Make sure you are applying getRootView() method on a first level child in view hierarchy.
             mRootView = carImageView.getRootView();
         }
 

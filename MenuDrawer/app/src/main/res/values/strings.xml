@@ -5,4 +5,5 @@
         <item>VENDER</item>
         <item>CUENTA</item>
     </string-array>
+    <string name="status_car_booked">RESERVADO</string>
 </resources>

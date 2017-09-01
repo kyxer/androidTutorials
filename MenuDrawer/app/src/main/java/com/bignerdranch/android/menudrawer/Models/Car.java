@@ -80,6 +80,39 @@ public class Car {
     @SerializedName("status")
     @Expose
     private StatusCar status;
+    @SerializedName("promotion_price")
+    @Expose
+    private Double promotionPrice;
+    @SerializedName("promotion_name")
+    @Expose
+    private String promotionName;
+    @SerializedName("promotion_color")
+    @Expose
+    private String promotionColor;
+
+    public Double getPromotionPrice() {
+        return promotionPrice;
+    }
+
+    public void setPromotionPrice(Double promotionPrice) {
+        this.promotionPrice = promotionPrice;
+    }
+
+    public String getPromotionName() {
+        return promotionName;
+    }
+
+    public void setPromotionName(String promotionName) {
+        this.promotionName = promotionName;
+    }
+
+    public String getPromotionColor() {
+        return promotionColor;
+    }
+
+    public void setPromotionColor(String promotionColor) {
+        this.promotionColor = promotionColor;
+    }
 
     public Integer getId() {
         return id;
