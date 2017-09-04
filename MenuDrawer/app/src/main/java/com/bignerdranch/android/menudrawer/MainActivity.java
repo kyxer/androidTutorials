@@ -1,6 +1,5 @@
 package com.bignerdranch.android.menudrawer;
 
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -12,13 +11,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bignerdranch.android.menudrawer.Adapters.DrawerItemCustomAdapter;
 import com.bignerdranch.android.menudrawer.Fragments.BuyFragment;
 import com.bignerdranch.android.menudrawer.Fragments.FixturesFragment;
-import com.bignerdranch.android.menudrawer.Fragments.TableFragment;
+import com.bignerdranch.android.menudrawer.Fragments.AccountFragment;
 import com.bignerdranch.android.menudrawer.Models.DataModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new FixturesFragment();
                 break;
             case 2:
-                fragment = new TableFragment();
+                fragment = new AccountFragment();
                 break;
 
             default:
@@ -141,10 +141,26 @@ public class MainActivity extends AppCompatActivity {
         if (position == 0){
             View aux = LayoutInflater.from(this).inflate(R.layout.toolbar_sell,null);
             container.addView(aux);
+            Button filterButton = aux.findViewById(R.id.filter_button);
+            Button orderButton = aux.findViewById(R.id.order_button);
+            filterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tappedFilterButton();
+                }
+            });
+
+            orderButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tappedOrderButton();
+                }
+            });
         } else if (position == 1) {
 
         } else if (position == 2) {
-
+            View aux = LayoutInflater.from(this).inflate(R.layout.toolbar_account,null);
+            container.addView(aux);
         }
     }
 
@@ -152,5 +168,13 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name, R.string.app_name);
         //This is necessary to change the icon of the Drawer Toggle upon state change.
         mDrawerToggle.syncState();
+    }
+
+    void tappedFilterButton(){
+        Log.i("GENERAL","tapped filter Button");
+    }
+
+    void tappedOrderButton(){
+        Log.i("GENERAL","tapped order Button");
     }
 }

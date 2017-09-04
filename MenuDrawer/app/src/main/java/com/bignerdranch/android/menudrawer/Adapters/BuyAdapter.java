@@ -94,10 +94,7 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
             statusTextView.setBackgroundColor(Color.parseColor(car.getPromotionColor()));
         }
 
-        //TextView yearProductionTextView = holder.productionYear;
-        //yearProductionTextView.setText(car.getBodyType());
         Picasso.with(getContext()).load(car.getImageUrl()).error(android.R.drawable.stat_notify_error).fit().into(holder.carImageView);
-
         setAnimation(holder.itemView, position);
 
     }
@@ -109,7 +106,7 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
 
     public List<Car> getCarList() {
         if ( mCarList == null ) {
-            mCarList = new ArrayList<Car>();
+            mCarList = new ArrayList<>();
         }
         return mCarList;
     }
@@ -156,16 +153,16 @@ public class BuyAdapter extends RecyclerView.Adapter<BuyAdapter.BuyViewHolder> {
             // to access the context from any MovieViewHolder instance.
             super(itemView);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
-            carImageView = (ImageView) itemView.findViewById(R.id.carImageView);
-            detailTextView = (TextView) itemView.findViewById(R.id.detailTextView);
-            priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
-            statusTextView = (TextView) itemView.findViewById(R.id.statusTextView);
-            newArrivalImageView = (ImageView) itemView.findViewById(R.id.newArrivalImageView);
-            savingPriceTextView = (TextView) itemView.findViewById(R.id.savingPriceTextView);
-            marketPriceTextView = (TextView) itemView.findViewById(R.id.marketPriceTextView);
+            nameTextView = itemView.findViewById(R.id.nameTextView);
+            carImageView =  itemView.findViewById(R.id.carImageView);
+            detailTextView = itemView.findViewById(R.id.detailTextView);
+            priceTextView = itemView.findViewById(R.id.priceTextView);
+            statusTextView = itemView.findViewById(R.id.statusTextView);
+            newArrivalImageView = itemView.findViewById(R.id.newArrivalImageView);
+            savingPriceTextView = itemView.findViewById(R.id.savingPriceTextView);
+            marketPriceTextView = itemView.findViewById(R.id.marketPriceTextView);
 
-                    // Make sure you are applying getRootView() method on a first level child in view hierarchy.
+            // Make sure you are applying getRootView() method on a first level child in view hierarchy.
             mRootView = carImageView.getRootView();
         }
 
